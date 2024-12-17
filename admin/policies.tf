@@ -15,3 +15,12 @@ resource "spacelift_policy" "tag_driven_module_version_release" {
   space_id    = "root"
   labels      = ["autoattach:module"]
 }
+
+resource "spacelift_policy" "slack_notification" {
+  name        = "slack notification"
+  body        = file("./policies/notification/slack_notification.rego")
+  type        = "NOTIFICATION"
+  description = "This policy is used send a notification to Slack when a run succeeds."
+  space_id    = "root"
+  labels      = ["autoattach:*"]
+}

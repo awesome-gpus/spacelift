@@ -12,7 +12,7 @@ module "stack_aws_vpc" {
     enabled = true
     id      = spacelift_aws_integration.demo_aws_integration.id
   }
-  labels            = ["aws", "networking"]
+  labels            = ["aws", "networking", "infracost"]
   project_root      = "opentofu/aws/vpc"
   repository_branch = "main"
   tf_version        = "1.8.4"
@@ -41,7 +41,7 @@ module "stack_aws_ec2" {
   source = "spacelift.io/spacelift-solutions/stacks-module/spacelift"
 
   # Required inputs 
-  # description     = "creates a simple EC2 instance"
+  description     = "creates a simple EC2 instance"
   name            = "ec2"
   repository_name = "spacelift"
   # space_id        = spacelift_space.aws_opentofu.id
@@ -51,7 +51,7 @@ module "stack_aws_ec2" {
     enabled = true
     id      = spacelift_aws_integration.demo_aws_integration.id
   }
-  labels            = ["aws", "ec2"]
+  labels            = ["aws", "ec2", "infracost"]
   project_root      = "opentofu/aws/ec2"
   repository_branch = "main"
   tf_version        = "1.8.4"

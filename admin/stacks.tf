@@ -66,6 +66,7 @@ resource "spacelift_stack" "pulumi_aws_ec2" {
 
   autodeploy   = false
   description  = "creates a simple EC2 instanc using pulumi"
+  space_id     = spacelift_space.pulumi.id
   name         = "pulumi ec2"
   repository   = "spacelift"
   branch       = "main"

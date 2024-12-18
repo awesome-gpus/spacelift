@@ -1,0 +1,37 @@
+inputs:
+  - id: project_name
+    name: The name of the project
+  - id: team_identifier
+    name: The name of your team
+    type: select
+    options:
+      - Cloud Team
+      - Security Team
+      - Application Team
+stack:
+  name: ${{ inputs.project_name }}
+  space: root
+  description: >
+    Stack created from Developer Sandbox blueprint to deploy a temp environment for testing
+  attachments:
+    clouds:
+      aws:
+        id: spacelift_aws_integration.demo_aws_integration.id
+        read: true
+        write: true
+  labels:
+    - "blueprint"
+    - "team:${{ inputs.team_identifier }}"
+  auto_deploy: true
+  local_preview_enabled: true
+  vcs:
+    branch: main
+    repository: "spacelift"
+    provider: GITHUB
+    project_root: "opentofu/s3"
+  vendor:
+    terraform:
+      manage_state: true
+      version: "1.5.7"
+options:
+  trigger_run: true

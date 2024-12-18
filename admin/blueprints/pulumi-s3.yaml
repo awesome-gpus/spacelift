@@ -26,7 +26,9 @@ stack:
   auto_deploy: true
   local_preview_enabled: true
   environment:
-    TF_VAR_bucket_name: ${{ inputs.bucket_name }}
+    variables:
+      - name: TF_VAR_bucket_name
+        value: ${{ inputs.bucket_name }}
   vcs:
     branch: main
     repository: "spacelift"

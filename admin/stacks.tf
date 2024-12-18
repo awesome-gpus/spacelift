@@ -85,7 +85,9 @@ module "pulumi_stack_aws_ec2" {
   }
 
   environment_variables = {
-    AWS_REGION = "us-east-1"
+    AWS_REGION = {
+      value = "us-east-1"
+    }
   }
 
   hooks = {

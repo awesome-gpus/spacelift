@@ -84,6 +84,10 @@ module "pulumi_stack_aws_ec2" {
     stack_name = "pulumi ec2"
   }
 
+  environment_variables = {
+    AWS_REGION = "us-east-1"
+  }
+
   hooks = {
     before_init = [
       "pip install -r requirements.txt"

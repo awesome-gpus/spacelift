@@ -1,6 +1,6 @@
 inputs:
-  - id: project_name
-    name: The name of the project
+  - id: bucket_name
+    name: The name of the bucket
   - id: team_identifier
     name: The name of your team
     type: select
@@ -9,19 +9,20 @@ inputs:
       - Security Team
       - Application Team
 stack:
-  name: ${{ inputs.project_name }}
+  name: blueprint-bucket ${{ inputs.bucket_name }}
   space: root
   description: >
-    Stack created from Developer Sandbox blueprint to deploy a temp environment for testing
+    Creates an arbitrary s3 bucket
   attachments:
     clouds:
       aws:
-        id: spacelift_aws_integration.demo_aws_integration.id
+        id: 01JFBPJZNZT1QNNSB40KJHKXM0
         read: true
         write: true
   labels:
     - "blueprint"
     - "team:${{ inputs.team_identifier }}"
+    - "bucket:${{ inputs.bucket_name }}"
   auto_deploy: true
   local_preview_enabled: true
   vcs:

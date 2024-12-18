@@ -1,8 +1,8 @@
-resource "aws_s3_bucket" "pulumi_state" {
-  bucket = "pulimi-state-bucket"
+variable "bucket_name" {
+    type        = string
+    description = "The name of the S3 bucket to create."
+}
 
-  tags = {
-    Name        = "pulumi"
-    Environment = "spacelift"
-  }
+resource "aws_s3_bucket" "this" {
+  bucket = var.bucket_name
 }

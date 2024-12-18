@@ -1,11 +1,11 @@
 resource "spacelift_space" "opentofu" {
-  name             = "aws"
+  name             = "opentofu"
   inherit_entities = true
   parent_space_id  = "root"
 }
 
 resource "spacelift_space" "pulumi" {
-  name             = "aws"
+  name             = "pulumi"
   inherit_entities = true
   parent_space_id  = "root"
 }

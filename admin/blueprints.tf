@@ -1,7 +1,7 @@
-resource "spacelift_blueprint" "pulumi_s3" {
-  name        = "pulumi s3 for backend"
-  description = "creates an s3 bucket for pulumi backend"
+resource "spacelift_blueprint" "s3_blueprint" {
+  name        = "s3 blueprint"
+  description = "creates an s3 bucket"
   space       = spacelift_space.pulumi.id
   state       = "PUBLISHED"
-  template    = file("blueprints/pulumi-s3.yaml")
+  template    = file("blueprints/s3.yaml")
 }

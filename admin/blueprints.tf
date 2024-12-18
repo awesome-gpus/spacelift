@@ -3,5 +3,5 @@ resource "spacelift_blueprint" "pulumi_s3" {
   description = "creates an s3 bucket for pulumi backend"
   space       = spacelift_space.pulumi.id
   state       = "DRAFT"
-  template    = file("./policies/plan/cost_estimation.rego")
+  template    = file("blueprints/pulumi-s3.yaml")
 }

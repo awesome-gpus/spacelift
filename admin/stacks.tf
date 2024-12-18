@@ -76,6 +76,8 @@ module "pulumi_stack_aws_ec2" {
   project_root      = "pulumi"
   repository_branch = "main"
 
+  runner_image = "public.ecr.aws/spacelift/runner-pulumi-python:latest"
+
   workflow_tool = "PULUMI"
   pulumi = {
     login_url  = "s3://pulumi-state-bucket"

@@ -81,5 +81,15 @@ module "pulumi_stack_aws_ec2" {
     login_url  = "s3://pulumi-state-bucket"
     stack_name = "pulumi ec2"
   }
+
+  hooks = {
+    before_init = [
+      "pip install -r requirements.txt"
+    ]
+    before_apply = [
+      "pip install -r requirements.txt"
+    ]
+  }
+
 }
 

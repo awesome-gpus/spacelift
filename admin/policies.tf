@@ -24,3 +24,12 @@ resource "spacelift_policy" "slack_notification" {
   space_id    = "root"
   labels      = ["autoattach:*"]
 }
+
+resource "spacelift_policy" "ec2_tagging_requirements" {
+  name = "ec2 tagging requirements"
+  body = file("./policies/plan/ec2_tagging_requirements.rego")
+  type = "PLAN"
+  description = "This policy enforces EC2 tagging requirements"
+  space_id = "root"
+  labels = ["autoattach:*"]
+}

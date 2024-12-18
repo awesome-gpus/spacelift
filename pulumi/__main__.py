@@ -36,7 +36,7 @@ server = aws.ec2.Instance(
     ami=ami.id,
     tags={
         "Name": "test-webserver",
-        "gate": "A3",
+        "CostCenter": "Applications-In-Production",
     }
 )
 

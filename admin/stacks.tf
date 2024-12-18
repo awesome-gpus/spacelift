@@ -81,7 +81,7 @@ module "pulumi_stack_aws_ec2" {
   workflow_tool = "PULUMI"
   pulumi = {
     login_url  = "s3://spacelift-pulumi-s3-backend"
-    stack_name = "pulumi ec2"
+    stack_name = "pulumi-ec2"
   }
 
   environment_variables = {

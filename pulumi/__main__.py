@@ -34,6 +34,10 @@ server = aws.ec2.Instance(
     vpc_security_group_ids=[group.id],
     user_data=user_data,
     ami=ami.id,
+    tags={
+        "Name": "test-webserver",
+        "gate": "A3",
+    }
 )
 
 pulumi.export("public_ip", server.public_ip)

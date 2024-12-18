@@ -178,6 +178,18 @@ variable "project_root" {
   default     = null
 }
 
+variable "pulumi" {
+  type = object({
+    login_url  = string
+    stack_name = string
+  })
+  description = "config for pulumi in spacelift"
+  default = {
+    login_url  = null
+    stack_name = null
+  }
+}
+
 variable "repository_branch" {
   type        = string
   description = "The name of the branch to use for the specified Git repository."
@@ -274,7 +286,7 @@ variable "workflow_tool" {
   default     = "OPEN_TOFU"
 
   validation {
-    condition     = contains(["TERRAFORM_FOSS", "OPEN_TOFU", "CLOUDFORMATION", "TERRAGRUNT", "ANSIBLE", "KUBERNETES"], var.workflow_tool)
-    error_message = "The workflow tool must be TERRAFORM_FOSS, OPEN_TOFU, CLOUDFORMATION, ANSIBLE, KUBERNETES, or TERRAGRUNT."
+    condition     = contains(["TERRAFORM_FOSS", "OPEN_TOFU", "CLOUDFORMATION", "TERRAGRUNT", "ANSIBLE", "KUBERNETES", "PULUMI"], var.workflow_tool)
+    error_message = "The workflow tool must be TERRAFORM_FOSS, OPEN_TOFU, CLOUDFORMATION, ANSIBLE, KUBERNETES, PULUMI or TERRAGRUNT."
   }
 }

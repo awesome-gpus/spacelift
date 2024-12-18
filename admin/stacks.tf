@@ -58,45 +58,28 @@ module "stack_aws_ec2" {
   # worker_pool_id            = string
 }
 
-resource "spacelift_stack" "pulumi_aws_ec2" {
-  pulumi {
+module "pulumi_stack_aws_ec2" {
+  source = "spacelift.io/spacelift-solutions/stacks-module/spacelift"
+
+  # Required inputs
+  description     = "creates a simple EC2 instanc using pulumi"
+  name            = "pulumi ec2"
+  repository_name = "spacelift"
+  space_id        = spacelift_space.pulumi.id
+
+  # Optional inputs
+  aws_integration = {
+    enabled = true
+    id      = spacelift_aws_integration.demo_aws_integration.id
+  }
+  labels            = ["aws", "ec2", "pulumi", "infracost"]
+  project_root      = "pulumi"
+  repository_branch = "main"
+
+  workflow_tool = "PULUMI"
+  pulumi = {
     login_url  = "s3://pulumi-state-bucket"
     stack_name = "pulumi ec2"
   }
-
-  autodeploy   = false
-  description  = "creates a simple EC2 instanc using pulumi"
-  space_id     = spacelift_space.pulumi.id
-  name         = "pulumi ec2"
-  repository   = "spacelift"
-  branch       = "main"
-  project_root = "pulumi"
-  # runner_image = "public.ecr.aws/t0p9w2l5/runner-pulumi-python:latest"
 }
-
-
-
-
-
-
-//TODO: add pulumi support for module
-# module "pulumi_stack_aws_ec2" {
-#   source = "spacelift.io/spacelift-solutions/stacks-module/spacelift"
-
-#   # Required inputs 
-#   description     = "creates a simple EC2 instanc using pulumi"
-#   name            = "pulumi ec2"
-#   repository_name = "spacelift"
-#   space_id        = spacelift_space.pulumi.id
-
-#   # Optional inputs 
-#   aws_integration = {
-#     enabled = true
-#     id      = spacelift_aws_integration.demo_aws_integration.id
-#   }
-#   labels            = ["aws", "ec2", "pulumi", "infracost"]
-#   project_root      = "pulumi"
-#   repository_branch = "main"
-#   # worker_pool_id            = string
-# }
 

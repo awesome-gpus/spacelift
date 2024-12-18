@@ -1,6 +1,6 @@
 resource "spacelift_policy" "cost_estimation" {
   name        = "cost estimate with infracost"
-  body        = file("./policies/plan/cost_estimate.rego")
+  body        = file("./policies/plan/cost_estimation.rego")
   type        = "PLAN"
   description = "This policy utilizes Infracost data to enforce cost controls on infrastructure deployments"
   space_id    = "root"

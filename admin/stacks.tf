@@ -5,7 +5,7 @@ module "stack_aws_vpc" {
   description     = "stack that creates a VPC and handles networking"
   name            = "networking"
   repository_name = "spacelift"
-  # space_id        = spacelift_space.aws_opentofu.id
+  space_id        = spacelift_space.opentofu.id
 
   # Optional inputs 
   aws_integration = {
@@ -44,7 +44,7 @@ module "stack_aws_ec2" {
   description     = "creates a simple EC2 instance"
   name            = "ec2"
   repository_name = "spacelift"
-  # space_id        = spacelift_space.aws_opentofu.id
+  space_id        = spacelift_space.opentofu.id
 
   # Optional inputs 
   aws_integration = {

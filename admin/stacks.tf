@@ -12,7 +12,7 @@ module "stack_aws_vpc" {
     enabled = true
     id      = spacelift_aws_integration.demo_aws_integration.id
   }
-  labels            = ["aws", "networking", "infracost"]
+  labels            = ["aws", "networking", "infracost", "security"]
   project_root      = "opentofu/aws/vpc"
   repository_branch = "main"
   tf_version        = "1.8.4"

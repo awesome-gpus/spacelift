@@ -25,11 +25,20 @@ resource "spacelift_policy" "slack_notification" {
   labels      = ["autoattach:*"]
 }
 
+resource "spacelift_policy" "pr_notification" {
+  name        = "pull request notification"
+  body        = file("./policies/notification/pr_comment.rego")
+  type        = "NOTIFICATION"
+  description = "This policy will add a comment to a pull request where it will list all the resources that were added, changed, deleted, moved, imported or forgotten."
+  space_id    = "root"
+  labels      = ["autoattach:*"]
+}
+
 resource "spacelift_policy" "ec2_tagging_requirements" {
-  name = "ec2 tagging requirements"
-  body = file("./policies/plan/ec2_tagging_requirements.rego")
-  type = "PLAN"
+  name        = "ec2 tagging requirements"
+  body        = file("./policies/plan/ec2_tagging_requirements.rego")
+  type        = "PLAN"
   description = "This policy enforces EC2 tagging requirements"
-  space_id = "root"
-  labels = ["autoattach:*"]
+  space_id    = "root"
+  labels      = ["autoattach:*"]
 }

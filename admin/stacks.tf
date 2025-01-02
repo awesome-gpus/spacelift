@@ -101,6 +101,43 @@ module "pulumi_stack_aws_ec2" {
 
 }
 
+module "stack_aws_vpc_kubernetes_example" {
+  source = "spacelift.io/spacelift-solutions/stacks-module/spacelift"
+
+  description     = "stack that creates a VPC for the Kubernetes Example"
+  name            = "kubernetes-vpc"
+  repository_name = "spacelift"
+  space_id        = spacelift_space.opentofu.id
+
+  aws_integration = {
+    enabled = true
+    id      = spacelift_aws_integration.demo_aws_integration.id
+  }
+  labels            = ["aws", "vpc"]
+  project_root      = "vpc"
+  repository_branch = "main"
+  tf_version        = "1.8.4"
+
+  dependencies = {
+    EKS = {
+      child_stack_id = module.stack_aws_eks_kubernetes_example.id
+
+      references = {
+        VPC_ID = {
+          output_name    = "vpc_id"
+          input_name     = "TF_VAR_vpc_id"
+          trigger_always = true
+        }
+        SUBNET_IDS = {
+          output_name    = "private_subnets"
+          input_name     = "TF_VAR_subnet_ids"
+          trigger_always = true
+        }
+      }
+    }
+  }
+}
+
 module "stack_aws_eks_kubernetes_example" {
   source = "spacelift.io/spacelift-solutions/stacks-module/spacelift"
 
@@ -115,7 +152,7 @@ module "stack_aws_eks_kubernetes_example" {
   }
 
   labels            = ["aws", "kubernetes"]
-  project_root      = "terraform/aws/eks"
+  project_root      = "eks"
   repository_branch = "main"
   tf_version        = "1.8.4"
 }

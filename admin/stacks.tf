@@ -101,3 +101,75 @@ module "pulumi_stack_aws_ec2" {
 
 }
 
+module "stack_aws_eks_kubernetes_example" {
+  source = "spacelift.io/spacelift-solutions/stacks-module/spacelift"
+
+  description     = "stack that creates an EKS Cluster for the Kubernetes Example"
+  name            = "eks-cluster"
+  repository_name = "demo"
+  space_id        = spacelift_space.opentofu.id
+
+  aws_integration = {
+    enabled = true
+    id      = spacelift_aws_integration.demo_aws_integration.id
+  }
+
+  labels            = ["aws", "kubernetes"]
+  project_root      = "terraform/aws/eks"
+  repository_branch = "main"
+  tf_version        = "1.8.4"
+}
+
+module "stack_aws_eks_worker_pool" {
+  source          = "spacelift.io/spacelift-solutions/stacks-module/spacelift"
+  description     = "stack to deploy private workers on AWS EKS"
+  name            = "worker pool on EKS"
+  repository_name = "demo"
+  space_id        = spacelift_space.opentofu.id
+
+  aws_integration = {
+    enabled = true
+    id      = spacelift_aws_integration.demo_aws_integration.id
+  }
+
+  labels            = ["aws", "eks"]
+  project_root      = "worker-pool"
+  repository_branch = "main"
+  tf_version        = "1.8.4"
+  dependencies = {
+    ADMIN = {
+      parent_stack_id = data.spacelift_current_stack.admin.id
+      references = {
+        WORKER_POOL_ID = {
+          output_name = "eks_worker_pool_id"
+          input_name  = "TF_VAR_worker_pool_id"
+        }
+        WORKER_POOL_CONFIG = {
+          output_name = "eks_worker_pool_config"
+          input_name  = "TF_VAR_worker_pool_config"
+        }
+        WORKER_POOL_PRIVATE_KEY = {
+          output_name = "eks_worker_pool_private_key"
+          input_name  = "TF_VAR_worker_pool_private_key"
+        }
+      }
+    }
+    EKS = {
+      parent_stack_id = module.stack_aws_eks_kubernetes_example.id
+      references = {
+        CLUSTER_NAME = {
+          output_name = "cluster_name"
+          input_name  = "TF_VAR_cluster_name"
+        }
+        CLUSTER_ENDPOINT = {
+          output_name = "cluster_endpoint"
+          input_name  = "TF_VAR_cluster_endpoint"
+        }
+        CLUSTER_CA_DATA = {
+          output_name = "cluster_certificate_authority_data"
+          input_name  = "TF_VAR_cluster_certificate_authority_data"
+        }
+      }
+    }
+  }
+}

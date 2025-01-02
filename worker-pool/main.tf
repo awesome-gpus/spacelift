@@ -21,7 +21,7 @@ resource "kubernetes_secret" "workerpool_creds" {
   }
 }
 
-resource "kubernetes_manifest" "openfaas_fn_showcow" {
+resource "kubernetes_manifest" "worker_crd" {
   manifest = {
     "apiVersion" = "workers.spacelift.io/v1beta1"
     "kind"       = "WorkerPool"

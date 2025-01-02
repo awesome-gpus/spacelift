@@ -106,7 +106,7 @@ module "stack_aws_eks_kubernetes_example" {
 
   description     = "stack that creates an EKS Cluster for the Kubernetes Example"
   name            = "eks-cluster"
-  repository_name = "demo"
+  repository_name = "spacelift"
   space_id        = spacelift_space.opentofu.id
 
   aws_integration = {
@@ -124,7 +124,7 @@ module "stack_aws_eks_worker_pool" {
   source          = "spacelift.io/spacelift-solutions/stacks-module/spacelift"
   description     = "stack to deploy private workers on AWS EKS"
   name            = "worker pool on EKS"
-  repository_name = "demo"
+  repository_name = "spacelift"
   space_id        = spacelift_space.opentofu.id
 
   aws_integration = {

@@ -9,7 +9,8 @@ resource "helm_release" "spacelift_kubernetes_workers" {
 }
 
 resource "kubernetes_secret" "workerpool_creds" {
-  metadata = {
+
+  metadata {
     name      = "workerpool-creds"
     namespace = "spacelift-worker-controller-system"
   }

@@ -1,6 +1,6 @@
 variable "bucket_name" {
-    type        = string
-    description = "The name of the S3 bucket to create."
+  type        = string
+  description = "The name of the S3 bucket to create."
 }
 
 resource "aws_s3_bucket" "this" {
@@ -8,5 +8,5 @@ resource "aws_s3_bucket" "this" {
 }
 
 output "bucket" {
-    value = aws_s3_bucket.this
+  value = aws_s3_bucket.this
 }

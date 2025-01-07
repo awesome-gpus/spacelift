@@ -45,6 +45,7 @@ module "stack_aws_ec2" {
   name            = "ec2"
   repository_name = "spacelift"
   space_id        = spacelift_space.opentofu.id
+  manage_state    = false
 
   # Optional inputs 
   aws_integration = {

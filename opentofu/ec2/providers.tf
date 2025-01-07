@@ -5,6 +5,13 @@ terraform {
       version = "5.66.0"
     }
   }
+  backend "s3" {
+    bucket         = "gpu-state"
+    key            = "state/terraform.tfstate"
+    region         = "us-east-1"
+    encrypt        = true
+    dynamodb_table = "mycomponents_tf_lockid"
+  }
 }
 
 provider "aws" {}

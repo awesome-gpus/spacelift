@@ -13,7 +13,7 @@ module "stack_aws_vpc" {
     id      = spacelift_aws_integration.demo_aws_integration.id
   }
   labels            = ["aws", "networking", "infracost", "security"]
-  project_root      = "opentofu/aws/vpc"
+  project_root      = "opentofu/vpc"
   repository_branch = "main"
   tf_version        = "1.8.4"
   # worker_pool_id            = string
@@ -53,7 +53,7 @@ module "stack_aws_ec2" {
     id      = spacelift_aws_integration.demo_aws_integration.id
   }
   labels            = ["aws", "ec2", "infracost"]
-  project_root      = "opentofu/aws/ec2"
+  project_root      = "opentofu/ec2"
   repository_branch = "main"
   tf_version        = "1.8.4"
   # worker_pool_id            = string
